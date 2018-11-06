@@ -1,0 +1,2 @@
+face_recognition library
+opencv(version 3.4.2)
