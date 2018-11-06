@@ -31,8 +31,7 @@ known_face_names = [
 
 Here in known_face_name[] list you can add your name you want to see while camera is recognising you.
 
-# Who maintains and contributes to the project?
-Created and managed by
+# Created and managed by
 # ADITYA SURANA.
 Thanks to google.
 
