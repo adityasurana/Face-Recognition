@@ -1,5 +1,41 @@
 import face_recognition
 import cv2
+import os
+
+# Use generic convention of files, do not hardcode file paths in your code. Here is some sample code to do so:
+
+BASE_DIR = os.path.dirname(__file__)
+image_dir = os.path.join(BASE_DIR, 'images')
+
+for root, dirs, files in os.walk(image_dir):
+    for file in files:
+        if file.endswith('png') or file.endswith('jpg'):
+            path = os.path.join(root, file)
+            label = os.path.basename(os.path.dirname(path))
+            # print(label, path, sep = ': ')
+
+            if label not in target_ids:
+                target_ids[label] = current_id
+                current_id += 1
+            id_ = target_ids[label]
+
+            
+            # open image using pillow and convert to grayscale 
+            pil_image = Image.open(path).convert('L') 
+
+            # Resize image
+            #final_image = pil_image.resize((540,540), Image.ANTIALIAS)
+
+            # convert pil image into numpy array
+            image_array = np.array(pil_image, 'uint8')
+            # print(image_array)
+            faces = face_cascade.detectMultiScale(image_array, scaleFactor = 1.5, minNeighbors = 5)
+
+            for (x, y, w, h) in faces:
+                region_of_interest = image_array[y:y+h, x:x+w]
+                features.append(region_of_interest)
+                targets.append(id_)
+
 
 # Get a reference to webcam #0 (the default one)
 video_capture = cv2.VideoCapture(0)
